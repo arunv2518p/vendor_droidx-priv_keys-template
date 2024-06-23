@@ -15,9 +15,6 @@ jobs:
       - name: Setup Environment‌‌
         run: |
           cd $GITHUB_WORKSPACE
-          sudo apt remove firefox
-          sudo apt autoremove
-          sudo apt-get update && sudo apt-get upgrade -y
           sudo apt-get install git zip curl openssl unzip -y
 
       - name: Generate Keys
@@ -28,7 +25,7 @@ jobs:
           cd work
           git clone https://github.com/arunv2518p/vendor_droidx-priv_keys-template.git vendor/lineage-priv/keys
           cd vendor/lineage-priv/keys
-          ./gen_keys
+          sudo bash ./gen_keys
           cd ../../../
           zip -r9 keys.zip *
           cp *.zip ./out
