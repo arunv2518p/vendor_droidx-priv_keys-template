@@ -1,0 +1,46 @@
+name: Key Generator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Environment‌‌
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo apt remove firefox
+          sudo apt autoremove
+          sudo apt-get update && sudo apt-get upgrade -y
+          sudo apt-get install git zip curl openssl unzip -y
+
+      - name: Generate Keys
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir work
+          mkdir out
+          cd work
+          git clone https://github.com/arunv2518p/vendor_droidx-priv_keys-template.git vendor/lineage-priv/keys
+          cd vendor/lineage-priv/keys
+          ./gen_keys
+          cd ../../../
+          zip -r9 keys.zip *
+          cp *.zip ./out
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ github.workspace }}/out/*
+          name: Keys-${{ github.run_id }}
+          tag_name: ${{ github.run_id }}
+          body: |
+            Keys
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
