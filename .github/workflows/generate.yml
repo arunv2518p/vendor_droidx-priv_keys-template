@@ -20,6 +20,7 @@ jobs:
       - name: Generate Keys
         run: |
           cd $GITHUB_WORKSPACE
+          sudo chmod -R 0777 ./*
           mkdir work
           mkdir out
           cd work
@@ -27,7 +28,6 @@ jobs:
           cd vendor/lineage-priv/keys
           sudo bash ./gen_keys
           cd ../../../
-          sudo chmod -R 0777 ./*
           sudo zip -r9 keys.zip *
           cp *.zip ./out
 
