@@ -29,13 +29,13 @@ jobs:
           sudo bash ./gen_keys
           cd ../../../
           sudo zip -r9 keys.zip *
-          cp *.zip ./out
+          cp *.zip /home/runner/work/vendor_droidx-priv_keys-template/vendor_droidx-priv_keys-template/out/
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            $GITHUB_WORKSPACE/out/*
+            /home/runner/work/vendor_droidx-priv_keys-template/vendor_droidx-priv_keys-template/out/*
           name: Keys-${{ github.run_id }}
           tag_name: ${{ github.run_id }}
           body: |
