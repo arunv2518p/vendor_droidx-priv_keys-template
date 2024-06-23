@@ -35,7 +35,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ${{ github.workspace }}/out/*
+            $GITHUB_WORKSPACE/out/*
           name: Keys-${{ github.run_id }}
           tag_name: ${{ github.run_id }}
           body: |
