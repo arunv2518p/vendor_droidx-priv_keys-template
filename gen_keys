@@ -60,4 +60,4 @@ echo "" >> keys.mk
 echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/droidx-priv/keys/releasekey" >> keys.mk
 
 # Delete files and directories after key generation
-rm -rf .git .gitignore _data README.md gen_keys
+rm -rf .git .github .gitignore _data README.md gen_keys
